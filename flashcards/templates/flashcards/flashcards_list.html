@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%  for card in cards %}
+    {{  card.id  }}.
+    {{  card.first_side  }} -
+    {{  card.second_side  }} -
+    {{  card.is_answered  }} --
+    {{  card.category.id  }}
+    {{  card.category.name  }}
+    <br>
+{%  endfor  %}
+</body>
+</html>
