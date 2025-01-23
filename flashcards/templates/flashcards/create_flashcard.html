@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
-</head>
-<body>
+{%  extends "flashcards/base.html"  %}
+
+{%  block title  %}{%  endblock  %}
+
+{%  block content  %}
 <form method="POST">
     {% csrf_token %}
     {{form}}
     <input class="input_button" type="submit" value="Save">
 </form>
-</body>
-</html>
+{%  endblock  %}
