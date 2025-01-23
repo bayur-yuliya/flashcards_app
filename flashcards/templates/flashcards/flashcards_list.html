@@ -1,6 +1,6 @@
 {%  extends "flashcards/base.html"  %}
 
-{%  block title  %}{%  endblock  %}
+{%  block title  %}{{title}}{%  endblock  %}
 
 {%  block content  %}
 {%  for card in cards %}
@@ -10,6 +10,8 @@
     {{  card.is_answered  }} --
     {{  card.category.id  }}
     {{  card.category.name  }}
+    <br>
+    <a href="{%  url 'update_flashcard' card.id  %}">Update flashcard</a>
     <br>
 {%  endfor  %}
 {%  endblock  %}

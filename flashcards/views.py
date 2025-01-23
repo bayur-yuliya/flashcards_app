@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -6,7 +7,7 @@ from .models import Flashcard, Category
 
 
 def index(request):
-    return render(request, 'flashcards/index.html')
+    return render(request, 'flashcards/index.html', {'title': 'Index'})
 
 
 def create_flashcard(request):
@@ -24,7 +25,7 @@ def update_flashcard(request, flashcard_id):
     if request.method == 'GET':
         form = FlashcardForm(instance=current_flashcard)
         return render(request, 'flashcards/update_flashcard.html', {'title': 'Update', 'form': form})
-    form = CategoryForm(request.POST, instance=current_flashcard)
+    form = FlashcardForm(request.POST, instance=current_flashcard)
     if form.is_valid():
         form.save()
     return redirect(reverse('flashcards_list'))
@@ -67,6 +68,7 @@ def flashcards_list(request):
     })
 
 
-def learning_flashcards(request):
-    return render(request, 'flashcards/learning_flashcards.html', {'title': 'Learning',})
+def learning_flashcards(request, category_id):
+    cards = Flashcard.objects.filter(category=Category.objects.get(id=category_id))
+    return render(request, 'flashcards/learning_flashcards.html', {'title': 'Learning', 'cards': cards})
 

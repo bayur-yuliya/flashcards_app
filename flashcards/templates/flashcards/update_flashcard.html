@@ -1,5 +1,13 @@
 {%  extends "flashcards/base.html"  %}
 
-{%  block title  %}{%  endblock  %}
+{%  block title  %}{{title}}{%  endblock  %}
 
-{%  block content  %}{%  endblock  %}
+{%  block content  %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input class="input_button" type="submit" value="Save">
+</form>
+
+{%  endblock  %}

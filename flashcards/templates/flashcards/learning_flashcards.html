@@ -1,5 +1,13 @@
 {%  extends "flashcards/base.html"  %}
 
-{%  block title  %}{%  endblock  %}
+{%  block title  %}{{title}}{%  endblock  %}
 
-{%  block content  %}{%  endblock  %}
+{%  block content  %}
+
+{%  for card in cards  %}
+    {{card.first_side}} -
+    {{card.second_side}}
+    <br>
+{%  endfor  %}
+
+{%  endblock  %}

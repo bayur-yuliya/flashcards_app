@@ -1,5 +1,12 @@
 {%  extends "flashcards/base.html"  %}
 
-{%  block title  %}{%  endblock  %}
+{%  block title  %}{{title}}{%  endblock  %}
 
-{%  block content  %}{%  endblock  %}
+{%  block content  %}
+
+<a href="{%  url 'create_flashcard'  %}">create_flashcard</a> <br>
+<a href="{%  url 'create_category'  %}">create_category</a> <br>
+<a href="{%  url 'categories_list'  %}">categories_list</a> <br>
+<a href="{%  url 'flashcards_list'  %}">flashcards_list</a> <br>
+
+{%  endblock  %}
