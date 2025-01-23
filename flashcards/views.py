@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -69,6 +68,30 @@ def flashcards_list(request):
 
 
 def learning_flashcards(request, category_id):
-    cards = Flashcard.objects.filter(category=Category.objects.get(id=category_id))
-    return render(request, 'flashcards/learning_flashcards.html', {'title': 'Learning', 'cards': cards})
+    card = Flashcard.objects.filter(category=Category.objects.get(id=category_id), is_answered=False)
+    len_ = len(card)
+    last = True if len_ == 1 else False
+    first_side = True
+
+    if request.GET.get('next_side1'):
+        first_side = False
+
+    if request.GET.get('next_side2'):
+        first_side = True
+
+    if request.GET.get('learn'):
+        Flashcard.objects.filter(id=card[0].id).update(is_answered=True)
+
+    if request.GET.get('complete'):
+        Flashcard.objects.all().update(is_answered=False)
+        return redirect(reverse('categories_list'))
+
+    return render(request, 'flashcards/learning_flashcards.html', {
+        'title': 'Learning',
+        'card1': card[0].first_side,
+        'card2': card[0].second_side,
+        'category_id': category_id,
+        'last': last,
+        'first_side': first_side
+    })
 

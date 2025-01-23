@@ -4,10 +4,30 @@
 
 {%  block content  %}
 
-{%  for card in cards  %}
-    {{card.first_side}} -
-    {{card.second_side}}
-    <br>
-{%  endfor  %}
+{%  if first_side  %}
+{{card1}}
+<br>
+<form method="GET">
+    <input class="input_button" type="submit" name='next_side1' value="Next side">
+</form>
+{%  else  %}
+{{card2}}
+<br>
+<form method="GET">
+    <input class="input_button" type="submit" name='next_side2' value="Next side">
+</form>
+{%  endif  %}
+
+<br>
+<br>
+<form method="GET">
+    {% csrf_token %}
+    {%  if last  %}
+    <input class="input_button" type="submit" name='complete' value="Сomplete">
+    {%  else  %}
+    <input class="input_button" type="submit" name='learn' value="Good">
+    {%  endif  %}
+</form>
+
 
 {%  endblock  %}
