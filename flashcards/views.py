@@ -30,6 +30,24 @@ def update_flashcard(request, flashcard_id):
     return redirect(reverse('flashcards_list'))
 
 
+def flashcards_list(request):
+    cards = Flashcard.objects.all()
+    return render(request, 'flashcards/flashcards_list.html', {
+        'title': 'Flashcards',
+        'cards': cards,
+    })
+
+
+def delete_flashcard(request, flashcard_id):
+    card_deleted = Flashcard.objects.get(id=flashcard_id)
+    card_deleted.delete()
+    cards = Flashcard.objects.all()
+    return render(request, 'flashcards/flashcards_list.html', {
+        'title': 'Flashcards',
+        'cards': cards,
+    })
+
+
 def create_category(request):
     if request.method == 'GET':
         form = CategoryForm()
@@ -53,17 +71,20 @@ def update_category(request, category_id):
 
 def categories_list(request):
     categories = Category.objects.all()
+
     return render(request, 'flashcards/categories_list.html', {
         'title': 'Categories',
         'categories': categories,
     })
 
 
-def flashcards_list(request):
-    cards = Flashcard.objects.all()
-    return render(request, 'flashcards/flashcards_list.html', {
-        'title': 'Flashcards',
-        'cards': cards,
+def delete_category(request, category_id):
+    category_deleted = Category.objects.get(id=category_id)
+    category_deleted.delete()
+    categories = Category.objects.all()
+    return render(request, 'flashcards/categories_list.html', {
+        'title': 'Categories',
+        'categories': categories,
     })
 
 
@@ -95,3 +116,6 @@ def learning_flashcards(request, category_id):
         'first_side': first_side
     })
 
+
+def finish(request):
+    return render(request, 'flashcards/finish.html', {'title': 'Finish'})

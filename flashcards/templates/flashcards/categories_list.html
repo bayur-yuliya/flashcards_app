@@ -4,13 +4,22 @@
 
 {%  block content  %}
 
-{%  for category in categories %}
-    {{  category  }}   -
-    <a href="{%  url 'update_category' category.id %}">Update category</a>
-    <a href="{%  url 'create_flashcard' %}">Create flashcard</a>
-    <a href="{%  url 'learning_flashcards' category.id  %}">Learning</a><br>
-{%  endfor  %}
-<br>
+<form method="POST">
+    {% csrf_token %}
+
+    {%  for category in categories %}
+        {{  category  }}   -
+        <a href="{%  url 'update_category' category.id %}">Update category</a>
+        <a href="{%  url 'create_flashcard' %}">Create flashcard</a>
+        <a href="{%  url 'learning_flashcards' category.id  %}">Learning</a>
+        <a href="{%  url 'delete_category' category.id  %}">Delete</a>
+        <br>
+    {%  endfor  %}
+
+    <br>
+
+</form>
+
 <a href="{%  url 'create_category'  %}">Create category</a>
 
 {%  endblock  %}
