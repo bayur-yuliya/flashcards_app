@@ -1,31 +1,30 @@
 {%  extends "flashcards/base.html"  %}
+{%  load static  %}
 
 {%  block title  %}{{title}}{%  endblock  %}
 
 {%  block content  %}
 
-{%  if first_side  %}
-{{card1}}
-<br>
-<form method="GET">
-    <input class="input_button" type="submit" name='next_side1' value="Next side">
+<script>
+    window.pageData = {
+        front: "{{ card1 }}",
+        back: "{{ card2 }}"
+    };
+</script>
+
+<form>
+    <input type="button" value="Перевернуть карточку" accesskey="s" >
+    <p></p>
 </form>
-{%  else  %}
-{{card2}}
-<br>
-<form method="GET">
-    <input class="input_button" type="submit" name='next_side2' value="Next side">
-</form>
-{%  endif  %}
 
 <br>
 <br>
-<form method="GET">
+<form method="POST">
     {% csrf_token %}
     {%  if last  %}
-    <input class="input_button" type="submit" name='complete' value="Сomplete">
+        <input class="input_button" type="submit" name='complete' value="Сomplete">
     {%  else  %}
-    <input class="input_button" type="submit" name='learn' value="Good">
+        <input class="input_button" type="submit" name='learn' value="Good">
     {%  endif  %}
 </form>
 

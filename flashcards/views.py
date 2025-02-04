@@ -94,16 +94,17 @@ def learning_flashcards(request, category_id):
     last = True if len_ == 1 else False
     first_side = True
 
-    if request.GET.get('next_side1'):
-        first_side = False
-
-    if request.GET.get('next_side2'):
+    if request.GET.get('side_1'):
         first_side = True
 
-    if request.GET.get('learn'):
+
+    if request.GET.get('side_2'):
+        first_side = False
+
+    if request.POST.get('learn'):
         Flashcard.objects.filter(id=card[0].id).update(is_answered=True)
 
-    if request.GET.get('complete'):
+    if request.POST.get('complete'):
         Flashcard.objects.all().update(is_answered=False)
         return redirect(reverse('categories_list'))
 

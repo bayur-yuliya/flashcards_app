@@ -1,3 +1,4 @@
+{%  load static  %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,5 +11,7 @@
 <body>
 <a href="{%  url 'index'  %}">Home page</a> <hr>
 {%  block content  %}{%  endblock  %}
+<script type="text/javascript" src='{% static "flashcards/js/flashcards_list.js" %}'>
+</script>
 </body>
 </html>
