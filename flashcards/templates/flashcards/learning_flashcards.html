@@ -1,0 +1,33 @@
+{%  extends "flashcards/base.html"  %}
+{%  load static  %}
+
+{%  block title  %}{{title}}{%  endblock  %}
+
+{%  block content  %}
+
+<script>
+    window.pageData = {
+        front: "{{ card1 }}",
+        back: "{{ card2 }}"
+    };
+</script>
+
+<form>
+    <p></p>
+    <input type="button" value="Перевернуть карточку">
+</form>
+
+<br>
+<br>
+<form method="POST">
+    {% csrf_token %}
+    {%  if last  %}
+        <input class="input_button" type="submit" name='complete' value="Сomplete">
+    {%  else  %}
+        <input class="input_button" type="submit" name='learn' value="Good">
+    {%  endif  %}
+</form>
+
+<script type="text/javascript" src='{% static "flashcards/js/flashcards_list.js" %}'>
+</script>
+{%  endblock  %}
