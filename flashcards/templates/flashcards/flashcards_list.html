@@ -7,12 +7,13 @@
     {{  card.id  }}.
     {{  card.first_side  }} -
     {{  card.second_side  }} -
-    {{  card.is_answered  }} --
-    {{  card.category.id  }}
-    {{  card.category.name  }}
+    {{  card.category.id  }}. {{  card.category.name  }}
     <br>
-    <a href="{%  url 'update_flashcard' card.id  %}">Update flashcard</a>
-    <a href="{%  url 'delete_flashcard' card.id  %}">Delete</a>
+    <a href="{%  url 'update_flashcard' card.id  %}"><button type="button">Update flashcard</button></a>
+    <a href="{%  url 'delete_flashcard' card.id  %}"><button type="button">Delete</button></a>
     <br>
+    <hr>
 {%  endfor  %}
+
+<a href="{%  url 'create_flashcard'  %}"><button type="button">create_flashcard</button></a>
 {%  endblock  %}

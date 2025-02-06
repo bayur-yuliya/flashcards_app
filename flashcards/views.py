@@ -41,11 +41,7 @@ def flashcards_list(request):
 def delete_flashcard(request, flashcard_id):
     card_deleted = Flashcard.objects.get(id=flashcard_id)
     card_deleted.delete()
-    cards = Flashcard.objects.all()
-    return render(request, 'flashcards/flashcards_list.html', {
-        'title': 'Flashcards',
-        'cards': cards,
-    })
+    return redirect(reverse('flashcards_list'))
 
 
 def create_category(request):
@@ -96,7 +92,6 @@ def learning_flashcards(request, category_id):
 
     if request.GET.get('side_1'):
         first_side = True
-
 
     if request.GET.get('side_2'):
         first_side = False

@@ -9,9 +9,8 @@
     <title>{%  block title  %}{%  endblock  %}</title>
 </head>
 <body>
-<a href="{%  url 'index'  %}">Home page</a> <hr>
+<a href="{%  url 'index'  %}">Home page</a>
+<hr>
 {%  block content  %}{%  endblock  %}
-<script type="text/javascript" src='{% static "flashcards/js/flashcards_list.js" %}'>
-</script>
 </body>
 </html>
