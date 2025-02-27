@@ -9,7 +9,7 @@ class Category(models.Model):
 
 
 class Flashcard(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='flashcards')
     first_side = models.TextField(blank=False)
     second_side = models.TextField(blank=False)
     is_answered = models.BooleanField(default=False)

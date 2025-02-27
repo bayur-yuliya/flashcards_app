@@ -7,7 +7,7 @@
     {% csrf_token %}
 
     {%  for category in categories %}
-        {{  category  }}   -
+        {{  category  }} ({{  category.flashcards.count  }})  -
         <a href="{%  url 'learning_flashcards' category.id  %}"><button type="button">Learning</button></a>
         <a href="{%  url 'learning_flashcards' category.id  %}?reverse=1"><button type="button">Learning by second side</button></a>
         <div align="right">
