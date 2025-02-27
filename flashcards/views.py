@@ -85,8 +85,10 @@ def delete_category(request, category_id):
 
 
 def learning_flashcards(request, category_id):
+    if len(Flashcard.objects.filter(category=Category.objects.get(id=category_id))) == 0:
+        return redirect(reverse('create_flashcard'))
+
     card = Flashcard.objects.filter(category=Category.objects.get(id=category_id), is_answered=False)
-    print(card)
 
     if request.POST.get('learn'):
         Flashcard.objects.filter(id=card[0].id).update(is_answered=True)
@@ -98,10 +100,17 @@ def learning_flashcards(request, category_id):
     len_ = len(card)
     last = True if len_ == 1 else False
 
+    if request.GET.get('reverse'):
+        card1 = card[0].second_side
+        card2 = card[0].first_side
+    else:
+        card1 = card[0].first_side
+        card2 = card[0].second_side
+
     return render(request, 'flashcards/learning_flashcards.html', {
         'title': 'Learning',
-        'card1': card[0].first_side,
-        'card2': card[0].second_side,
+        'card1': card1,
+        'card2': card2,
         'category_id': category_id,
         'last': last,
     })
