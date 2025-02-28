@@ -4,14 +4,14 @@
 
 {%  block content  %}
 {%  for card in cards %}
-    {{  card.id  }}.
-    {{  card.first_side  }} -
-    {{  card.second_side  }} -
-    {{  card.category.id  }}. {{  card.category.name  }}
-    <br>
-    <a href="{%  url 'update_flashcard' card.id  %}"><button type="button">Update flashcard</button></a>
-    <a href="{%  url 'delete_flashcard' card.id  %}"><button type="button">Delete</button></a>
-    <br>
+    <div class="flashcard" style="margin-left: 70px; line-height: 40px">
+        {{  card.id  }}.
+        {{  card.first_side  }} |
+        {{  card.second_side  }}  -
+        {{  card.category.name  }}<br>
+        <a href="{%  url 'update_flashcard' card.id  %}"><button type="button">Update flashcard</button></a>
+        <a href="{%  url 'delete_flashcard' card.id  %}"><button type="button">Delete</button></a><br>
+    </div>
     <hr>
 {%  endfor  %}
 {%  endblock  %}
