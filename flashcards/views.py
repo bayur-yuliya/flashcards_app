@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -85,27 +87,36 @@ def delete_category(request, category_id):
 
 
 def learning_flashcards(request, category_id):
-    if len(Flashcard.objects.filter(category=Category.objects.get(id=category_id))) == 0:
-        return redirect(reverse('create_flashcard'))
+    category = get_object_or_404(Category, id=category_id)
 
-    card = Flashcard.objects.filter(category=Category.objects.get(id=category_id), is_answered=False)
+    if 'flashcards' not in request.session or request.GET.get('reset'):
+        flashcards = list(Flashcard.objects.filter(category=category).values_list('id', 'first_side', 'second_side'))
+        if not flashcards:
+            return redirect(reverse('create_flashcard'))
+        request.session['flashcards'] = flashcards
+    else:
+        flashcards = request.session['flashcards']
 
-    if request.POST.get('learn'):
-        Flashcard.objects.filter(id=card[0].id).update(is_answered=True)
+    card_index = random.randint(0, len(flashcards) - 1)
+    card_id, first_side, second_side = flashcards[card_index]
 
-    if request.POST.get('complete'):
-        Flashcard.objects.all().update(is_answered=False)
-        return redirect(reverse('categories_list'))
+    if request.method == 'POST':
+        if 'learn' in request.POST:
+            flashcards.pop(card_index)
+            request.session['flashcards'] = flashcards
+            if not flashcards:
+                return redirect(reverse('categories_list'))
+        elif 'wrong' in request.POST:
+            pass
+        elif 'complete' in request.POST:
+            return redirect(reverse('categories_list'))
 
-    len_ = len(card)
-    last = True if len_ == 1 else False
+    last = len(flashcards) == 1
 
     if request.GET.get('reverse'):
-        card1 = card[0].second_side
-        card2 = card[0].first_side
+        card1, card2 = second_side, first_side
     else:
-        card1 = card[0].first_side
-        card2 = card[0].second_side
+        card1, card2 = first_side, second_side
 
     return render(request, 'flashcards/learning_flashcards.html', {
         'title': 'Learning',
@@ -114,7 +125,3 @@ def learning_flashcards(request, category_id):
         'category_id': category_id,
         'last': last,
     })
-
-
-def finish(request):
-    return render(request, 'flashcards/finish.html', {'title': 'Finish'})

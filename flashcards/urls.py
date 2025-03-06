@@ -12,6 +12,5 @@ urlpatterns = [
     path('flashcard/', views.flashcards_list, name='flashcards_list'),
     path('delete_category/<int:category_id>', views.delete_category, name='delete_category'),
     path('delete_flashcard/<int:flashcard_id>', views.delete_flashcard, name='delete_flashcard'),
-    path('finish/', views.finish, name='finish'),
     path('', views.index, name='index'),
 ]
