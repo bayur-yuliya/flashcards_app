@@ -97,26 +97,28 @@ def learning_flashcards(request, category_id):
     else:
         flashcards = request.session['flashcards']
 
-    card_index = random.randint(0, len(flashcards) - 1)
-    card_id, first_side, second_side = flashcards[card_index]
+    last_card_id = request.session.get('last_card_id')
 
-    if request.method == 'POST':
-        if 'learn' in request.POST:
-            flashcards.pop(card_index)
-            request.session['flashcards'] = flashcards
-            if not flashcards:
-                return redirect(reverse('categories_list'))
-        elif 'wrong' in request.POST:
-            pass
-        elif 'complete' in request.POST:
+    if request.method == 'POST' and 'learn' in request.POST and last_card_id:
+        flashcards = [card for card in flashcards if card[0] != last_card_id]
+        request.session['flashcards'] = flashcards
+        if not flashcards:
             return redirect(reverse('categories_list'))
+    elif 'wrong' in request.POST:
+        pass
+    elif 'complete' in request.POST:
+        request.session.clear()
+        return redirect(reverse('categories_list'))
+
+    card = random.choice(flashcards)
+    request.session['last_card_id'] = card[0]
 
     last = len(flashcards) == 1
 
     if request.GET.get('reverse'):
-        card1, card2 = second_side, first_side
+        card1, card2 = card[2], card[1]
     else:
-        card1, card2 = first_side, second_side
+        card1, card2 = card[1], card[2]
 
     return render(request, 'flashcards/learning_flashcards.html', {
         'title': 'Learning',
