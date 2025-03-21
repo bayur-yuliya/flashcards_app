@@ -1,7 +1,9 @@
+import random
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from .forms import FlashcardForm, CategoryForm
+from .forms import FlashcardForm, CategoryForm, CategoryFindForm
 from .models import Flashcard, Category
 
 
@@ -32,9 +34,16 @@ def update_flashcard(request, flashcard_id):
 
 def flashcards_list(request):
     cards = Flashcard.objects.all()
+    form = CategoryFindForm()
+    if request.method == 'POST':
+        form = CategoryFindForm(request.POST)
+        if form.is_valid():
+            category = form.cleaned_data['model_choice']
+            cards = Flashcard.objects.filter(category=category)
     return render(request, 'flashcards/flashcards_list.html', {
         'title': 'Flashcards',
         'cards': cards,
+        'form': form,
     })
 
 
@@ -68,6 +77,9 @@ def update_category(request, category_id):
 def categories_list(request):
     categories = Category.objects.all()
 
+    if 'flashcards' in request.session:
+        del request.session['flashcards']
+
     return render(request, 'flashcards/categories_list.html', {
         'title': 'Categories',
         'categories': categories,
@@ -85,27 +97,45 @@ def delete_category(request, category_id):
 
 
 def learning_flashcards(request, category_id):
-    card = Flashcard.objects.filter(category=Category.objects.get(id=category_id), is_answered=False)
-    print(card)
+    category = get_object_or_404(Category, id=category_id)
 
-    if request.POST.get('learn'):
-        Flashcard.objects.filter(id=card[0].id).update(is_answered=True)
+    if 'flashcards' not in request.session:
+        flashcards = list(Flashcard.objects.filter(category=category).values_list('id', 'first_side', 'second_side'))
+        if not flashcards:
+            return redirect(reverse('create_flashcard'))
+        request.session['flashcards'] = flashcards
+    else:
+        flashcards = request.session['flashcards']
 
-    if request.POST.get('complete'):
-        Flashcard.objects.all().update(is_answered=False)
+    last_card_id = request.session.get('last_card_id')
+
+    if request.method == 'POST' and 'learn' in request.POST and last_card_id:
+        flashcards = [card for card in flashcards if card[0] != last_card_id]
+        request.session['flashcards'] = flashcards
+        if not flashcards:
+            return redirect(reverse('categories_list'))
+    elif 'wrong' in request.POST:
+        pass
+    elif 'complete' in request.POST:
+        request.session.clear()
         return redirect(reverse('categories_list'))
 
-    len_ = len(card)
-    last = True if len_ == 1 else False
+    card = random.choice(flashcards)
+    while card[0] == last_card_id:
+        card = random.choice(flashcards)
+    request.session['last_card_id'] = card[0]
+
+    last = len(flashcards) == 1
+
+    if request.GET.get('reverse'):
+        card1, card2 = card[2], card[1]
+    else:
+        card1, card2 = card[1], card[2]
 
     return render(request, 'flashcards/learning_flashcards.html', {
         'title': 'Learning',
-        'card1': card[0].first_side,
-        'card2': card[0].second_side,
+        'card1': card1,
+        'card2': card2,
         'category_id': category_id,
         'last': last,
     })
-
-
-def finish(request):
-    return render(request, 'flashcards/finish.html', {'title': 'Finish'})
