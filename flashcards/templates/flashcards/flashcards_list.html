@@ -3,9 +3,16 @@
 {%  block title  %}{{title}}{%  endblock  %}
 
 {%  block content  %}
+<form method="POST">
+    {%  csrf_token  %}
+    <div align="right">
+        {{  form.model_choice  }}
+        <input class="input_button" type="submit" value="Find">
+        <br><br>
+    </div>
+</form>
 {%  for card in cards %}
     <div class="flashcard" style="margin-left: 70px; line-height: 40px">
-        {{  card.id  }}.
         {{  card.first_side  }} |
         {{  card.second_side  }}  -
         {{  card.category.name  }}<br>

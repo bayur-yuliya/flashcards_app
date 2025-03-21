@@ -20,3 +20,10 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('name',)
+
+
+class CategoryFindForm(forms.Form):
+    model_choice = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        initial=0
+    )

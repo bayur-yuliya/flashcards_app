@@ -3,7 +3,7 @@ import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from .forms import FlashcardForm, CategoryForm
+from .forms import FlashcardForm, CategoryForm, CategoryFindForm
 from .models import Flashcard, Category
 
 
@@ -34,9 +34,16 @@ def update_flashcard(request, flashcard_id):
 
 def flashcards_list(request):
     cards = Flashcard.objects.all()
+    form = CategoryFindForm()
+    if request.method == 'POST':
+        form = CategoryFindForm(request.POST)
+        if form.is_valid():
+            category = form.cleaned_data['model_choice']
+            cards = Flashcard.objects.filter(category=category)
     return render(request, 'flashcards/flashcards_list.html', {
         'title': 'Flashcards',
         'cards': cards,
+        'form': form,
     })
 
 
@@ -70,6 +77,9 @@ def update_category(request, category_id):
 def categories_list(request):
     categories = Category.objects.all()
 
+    if 'flashcards' in request.session:
+        del request.session['flashcards']
+
     return render(request, 'flashcards/categories_list.html', {
         'title': 'Categories',
         'categories': categories,
@@ -89,7 +99,7 @@ def delete_category(request, category_id):
 def learning_flashcards(request, category_id):
     category = get_object_or_404(Category, id=category_id)
 
-    if 'flashcards' not in request.session or request.GET.get('reset'):
+    if 'flashcards' not in request.session:
         flashcards = list(Flashcard.objects.filter(category=category).values_list('id', 'first_side', 'second_side'))
         if not flashcards:
             return redirect(reverse('create_flashcard'))
@@ -111,6 +121,8 @@ def learning_flashcards(request, category_id):
         return redirect(reverse('categories_list'))
 
     card = random.choice(flashcards)
+    while card[0] == last_card_id:
+        card = random.choice(flashcards)
     request.session['last_card_id'] = card[0]
 
     last = len(flashcards) == 1
