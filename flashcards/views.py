@@ -7,10 +7,6 @@ from .forms import FlashcardForm, CategoryForm, CategoryFindForm
 from .models import Flashcard, Category
 
 
-def index(request):
-    return render(request, 'flashcards/index.html', {'title': 'Index'})
-
-
 def create_flashcard(request):
     if request.method == 'GET':
         form = FlashcardForm()

@@ -9,8 +9,9 @@
     <title>{%  block title  %}{%  endblock  %}</title>
 </head>
 <body>
-<a href="{%  url 'index'  %}">Home page</a>
 <div align="right">
+    <a href="{%  url 'categories_list'  %}"><button type="button">Categories list</button></a>
+    <a href="{%  url 'flashcards_list'  %}"><button type="button">Flashcards list</button></a>
     <a href="{%  url 'create_category'  %}"><button type="button">Create category</button></a>
     <a href="{%  url 'create_flashcard'  %}"><button type="button">Create flashcard</button></a>
 </div>
