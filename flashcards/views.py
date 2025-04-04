@@ -14,7 +14,7 @@ def create_flashcard(request):
     form = FlashcardForm(request.POST)
     if form.is_valid():
         form.save()
-    return redirect(reverse('flashcards_list'))
+    return redirect(reverse('categories_list'))
 
 
 def update_flashcard(request, flashcard_id):
@@ -25,7 +25,7 @@ def update_flashcard(request, flashcard_id):
     form = FlashcardForm(request.POST, instance=current_flashcard)
     if form.is_valid():
         form.save()
-    return redirect(reverse('flashcards_list'))
+    return redirect(reverse('categories_list'))
 
 
 def flashcards_list(request):
