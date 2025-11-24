@@ -30,6 +30,15 @@ h1 {
     margin-right: 60px;
 }
 
+select {
+    margin-left: 5%;
+    background: #d0e1f9;
+    color: #1e1f26;
+    border-radius: 9px;
+    width: 90%;
+    text-indent: 40px;
+}
+
 textarea {
     width: 90%;
     resize: none;
@@ -45,7 +54,7 @@ textarea:focus {
 }
 </style>
 
-<h1>Update card</h1>
+<h1>{{  title  }}</h1>
 
 <form method="POST">
     {% csrf_token %}

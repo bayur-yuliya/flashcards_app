@@ -10,7 +10,7 @@ from .models import Flashcard, Category
 def create_flashcard(request):
     if request.method == 'GET':
         form = FlashcardForm()
-        return render(request, 'flashcards/create_flashcard.html', {'title': 'Create', 'form': form})
+        return render(request, 'flashcards/create_flashcard.html', {'title': 'Create card', 'form': form})
     form = FlashcardForm(request.POST)
     if form.is_valid():
         form.save()
@@ -21,7 +21,7 @@ def update_flashcard(request, flashcard_id):
     current_flashcard = get_object_or_404(Flashcard, id=flashcard_id)
     if request.method == 'GET':
         form = FlashcardForm(instance=current_flashcard)
-        return render(request, 'flashcards/update_flashcard.html', {'title': 'Update', 'form': form})
+        return render(request, 'flashcards/update_flashcard.html', {'title': 'Update card', 'form': form})
     form = FlashcardForm(request.POST, instance=current_flashcard)
     if form.is_valid():
         form.save()
@@ -52,7 +52,7 @@ def delete_flashcard(request, flashcard_id):
 def create_category(request):
     if request.method == 'GET':
         form = CategoryForm()
-        return render(request, 'flashcards/create_category.html', {'title': 'Create', 'form': form})
+        return render(request, 'flashcards/create_category.html', {'title': 'Create category', 'form': form})
     form = CategoryForm(request.POST)
     if form.is_valid():
         form.save()
@@ -63,7 +63,7 @@ def update_category(request, category_id):
     current_category = get_object_or_404(Category, id=category_id)
     if request.method == 'GET':
         form = CategoryForm(instance=current_category)
-        return render(request, 'flashcards/update_category.html', {'title': 'Update', 'form': form})
+        return render(request, 'flashcards/update_category.html', {'title': 'Update category', 'form': form})
     form = CategoryForm(request.POST, instance=current_category)
     if form.is_valid():
         form.save()
@@ -129,7 +129,7 @@ def learning_flashcards(request, category_id):
         card1, card2 = card[1], card[2]
 
     return render(request, 'flashcards/learning_flashcards.html', {
-        'title': 'Learning',
+        'title': 'Learning cards',
         'card1': card1,
         'card2': card2,
         'category_id': category_id,

@@ -39,13 +39,22 @@ textarea {
     border-radius: 16px;
 }
 
+select {
+    margin-left: 5%;
+    background: #d0e1f9;
+    color: #1e1f26;
+    border-radius: 9px;
+    width: 90%;
+    text-indent: 40px;
+}
+
 textarea:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
 }
 </style>
 
-<h1>Create card</h1>
+<h1>{{  title  }}</h1>
 
 <form method="POST">
     {% csrf_token %}
