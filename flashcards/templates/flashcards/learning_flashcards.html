@@ -9,13 +9,45 @@
 .flashcard {
     text-align: center;
     margin: auto;
+    margin-top: 60px;
     margin-bottom: 30px;
     width: 60em;
     height: 100px;
-    border: 1px solid #333;
-    box-shadow: 8px 8px 5px #444;
     padding: 8px 12px;
-    background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+    background-color: #d0e1f9;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.change_card {
+    background: #4d648d;
+    color: white;
+    border: 1px solid #07575b;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.good_input_button {
+    background: #228B22;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #228B22;
+}
+
+.bad_input_button {
+    background: #B22222;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #B22222;
 }
 </style>
 
@@ -26,26 +58,24 @@
     };
 </script>
 
-<section  align="center">
+<section align="center">
 <form>
     <div class="flashcard"  align="center">
     <p></p>
     <br>
     </div>
-    <input type="button" value="Перевернуть карточку">
+    <input class="change_card" type="button" value="Перевернуть карточку">
 </form>
 </section>
 
-<br>
-<br>
 <div align="center">
 <form method="POST">
     {% csrf_token %}
-    <input class="input_button" type="submit" name='wrong' value="Wrong">
+    <input class="bad_input_button" type="submit" name='wrong' value="Wrong">
     {%  if last  %}
-        <input class="input_button" type="submit" name='complete' value="Сomplete">
+        <input class="good_input_button" type="submit" name='complete' value="Сomplete">
     {%  else  %}
-        <input class="input_button" type="submit" name='learn' value="Learn">
+        <input class="good_input_button" type="submit" name='learn' value="Learn">
     {%  endif  %}
 </form>
 </div>

@@ -13,10 +13,15 @@ class FlashcardForm(forms.ModelForm):
 
     class Meta:
         model = Flashcard
-        fields = ('first_side', 'second_side', 'category',)
+        fields = ('category', 'first_side', 'second_side',)
 
 
 class CategoryForm(forms.ModelForm):
+    name = forms.CharField(
+        max_length=250,
+        widget=forms.TextInput(attrs={'class': 'category-input'})
+    )
+
     class Meta:
         model = Category
         fields = ('name',)

@@ -3,9 +3,75 @@
 {%  block title  %}{{title}}{%  endblock  %}
 
 {%  block content  %}
+<style>
+.flashcard {
+    margin-right: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input_flashcard_form {
+    display: flex;
+    padding: 10px;
+    background-color: #283655;
+    margin: 20px 40px 30px 40px;
+    border-radius: 10px;
+}
+
+.card_text {
+    color: #d0e1f9;
+    font-size: 16px;
+}
+
+select {
+    margin-left: 5%;
+    background: #d0e1f9;
+    color: #1e1f26;
+    border-radius: 9px;
+    width: 90%;
+    text-indent: 40px;
+}
+
+.input_button {
+    background: #4d648d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 16px;
+    float: right;
+    margin-right: 60px;
+}
+
+.flashcard_button {
+    background: #4d648d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.delete_flashcard_button {
+    background: #B22222;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.group_buttons {
+    float: right;
+}
+
+hr {
+    border: 1px solid #283655;
+}
+</style>
+
 <form method="POST">
     {%  csrf_token  %}
-    <div align="right">
+    <div class="input_flashcard_form">
         {{  form.model_choice  }}
         <input class="input_button" type="submit" value="Find">
         <br><br>
@@ -13,11 +79,15 @@
 </form>
 {%  for card in cards %}
     <div class="flashcard" style="margin-left: 70px; line-height: 40px">
-        {{  card.first_side  }} |
-        {{  card.second_side  }}  -
-        {{  card.category.name  }}<br>
-        <a href="{%  url 'update_flashcard' card.id  %}"><button type="button">Update flashcard</button></a>
-        <a href="{%  url 'delete_flashcard' card.id  %}"><button type="button">Delete</button></a><br>
+        <span class="card_text">
+            {{  card.first_side  }} |
+            {{  card.second_side  }}  -
+            {{  card.category.name  }}
+        </span>
+        <div class="group_buttons">
+            <a href="{%  url 'update_flashcard' card.id  %}"><button class="flashcard_button" type="button">Update flashcard</button></a>
+            <a href="{%  url 'delete_flashcard' card.id  %}"><button class="delete_flashcard_button" type="button">Delete</button></a><br>
+        </div>
     </div>
     <hr>
 {%  endfor  %}

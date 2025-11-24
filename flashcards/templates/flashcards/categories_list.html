@@ -3,20 +3,63 @@
 {%  block title  %}{{title}}{%  endblock  %}
 
 {%  block content  %}
+<style>
+.category-container {
+    margin-right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px 20px 40px;
+}
+
+.category_text {
+    color: #d0e1f9;
+    font-size: 16px;
+    margin-right: 60px;
+}
+
+.category_button {
+    background: #4d648d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.delete_category_button {
+    background: #B22222;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.group_buttons {
+    float: right;
+}
+hr {
+    border: 1px solid #283655;
+}
+</style>
+
 <form method="POST">
     {% csrf_token %}
-
+    <br>
+    <br>
     {%  for category in categories %}
 
-    <div class="category-container" style="display: flex; justify-content: space-between; align-items: center; margin: 10px 20px 20px 40px;">
+    <div class="category-container">
         <div class="category" style="margin-left: 50px;">
-            {{ category }} ({{ category.flashcards.count }})  -
-            <a href="{% url 'learning_flashcards' category.id %}"><button type="button">Learning</button></a>
-            <a href="{% url 'learning_flashcards' category.id %}?reverse=1"><button type="button">Learning by second side</button></a>
+            <span class="category_text">
+            {{ category }} ({{ category.flashcards.count }})
+            </span>
+            <a href="{% url 'learning_flashcards' category.id %}"><button type="button" class="category_button" >Learning</button></a>
+            <a href="{% url 'learning_flashcards' category.id %}?reverse=1"><button type="button" class="category_button" >Learning by second side</button></a>
         </div>
-        <div style="margin-right: 40px;">
-            <a href="{% url 'update_category' category.id %}"><button type="button">Update category</button></a>
-            <a href="{% url 'delete_category' category.id %}"><button type="button">Delete</button></a>
+        <div class="group_buttons">
+            <a href="{% url 'update_category' category.id %}"><button class="category_button" type="button">Update category</button></a>
+            <a href="{% url 'delete_category' category.id %}"><button class="delete_category_button" type="button">Delete</button></a>
         </div>
     </div>
     <hr>
