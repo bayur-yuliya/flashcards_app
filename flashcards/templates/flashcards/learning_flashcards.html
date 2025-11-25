@@ -5,52 +5,6 @@
 
 {%  block content  %}
 
-<style>
-.flashcard {
-    text-align: center;
-    margin: auto;
-    margin-top: 60px;
-    margin-bottom: 30px;
-    width: 60em;
-    height: 100px;
-    padding: 8px 12px;
-    background-color: #d0e1f9;
-    border-radius: 12px;
-    font-size: 16px;
-}
-
-.change_card {
-    background: #4d648d;
-    color: white;
-    border: 1px solid #07575b;
-    padding: 12px 25px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.good_input_button {
-    background: #228B22;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    border: 1px solid #228B22;
-}
-
-.bad_input_button {
-    background: #B22222;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    border: 1px solid #B22222;
-}
-</style>
-
 <script>
     window.pageData = {
         front: "{{ card1 }}",
@@ -60,11 +14,11 @@
 
 <section align="center">
 <form>
-    <div class="flashcard"  align="center">
+    <div class="flashcard_display"  align="center">
     <p></p>
     <br>
     </div>
-    <input class="change_card" type="button" value="Перевернуть карточку">
+    <input class="change_card_button" type="button" value="Перевернуть карточку">
 </form>
 </section>
 

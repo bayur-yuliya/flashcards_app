@@ -3,48 +3,6 @@
 {%  block title  %}{{title}}{%  endblock  %}
 
 {%  block content  %}
-
-<style>
-h1 {
-    text-align: center;
-    color: #A9A9A9;
-}
-
-.input_category_form {
-    display: flex;
-    padding: 10px;
-    background-color: #283655;
-    margin: 20px 40px 30px 40px;
-    border-radius: 10px;
-}
-
-.category-input {
-    background: #d0e1f9;
-    color: #1e1f26;
-    border-radius: 9px;
-    width: 80%;
-    text-indent: 40px;
-}
-
-.input_button {
-    background: #4d648d;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    float: right;
-    margin-right: 60px;
-}
-
-.name_label {
-    color: #A9A9A9;
-    font-size: 20px;
-    margin-right: 30px;
-    margin-left: 30px;
-}
-</style>
-
 <h1>{{  title  }}</h1>
 <form method="POST">
     {% csrf_token %}

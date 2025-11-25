@@ -7,32 +7,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{%  block title  %}{%  endblock  %}</title>
+    <link type="text/css" rel="stylesheet" href="{%  static 'flashcards/css/styles.css'  %}">
 </head>
 <body>
-
-<style>
-  body {
-    background-color: #1e1f26;
-  }
-
-.container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.nav_bottom {
-    background-color: #283655;
-    color: white;
-    border-radius: 3px;
-    font-size: 16px;
-    padding: 8px 12px;
-    cursor: pointer;
-    border: 1px solid #283655;
-}
-</style>
-
 <br>
-<div class="container">
+<div class="header_container">
     <div>
         <a href="{%  url 'categories_list'  %}"><button type="button" class="nav_bottom">Categories list</button></a>
         <a href="{%  url 'flashcards_list'  %}"><button type="button" class="nav_bottom">Flashcards list</button></a>

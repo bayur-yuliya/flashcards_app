@@ -1,0 +1,194 @@
+body {
+    background-color: #1e1f26;
+}
+
+hr {
+    border: 1px solid #283655;
+}
+
+h1 {
+    text-align: center;
+    color: #A9A9A9;
+}
+
+select {
+    margin-left: 5%;
+    background: #d0e1f9;
+    color: #1e1f26;
+    border-radius: 9px;
+    width: 90%;
+    text-indent: 40px;
+}
+
+textarea {
+    width: 90%;
+    resize: none;
+    padding: 12px 15px;
+    font-size: 16px;
+    background: #d0e1f9;
+    border-radius: 16px;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+}
+
+
+.header_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav_bottom {
+    background-color: #283655;
+    color: white;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: 1px solid #283655;
+}
+
+.category-container {
+    margin-right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px 20px 40px;
+}
+
+.category_text {
+    color: #d0e1f9;
+    font-size: 16px;
+    margin-right: 60px;
+}
+
+.input_flashcard_form {
+    display: flex;
+    padding: 10px;
+    background-color: #283655;
+    margin: 20px 40px 30px 40px;
+    border-radius: 10px;
+}
+
+.card_text {
+    color: #d0e1f9;
+    font-size: 16px;
+}
+
+.flashcard_list_info {
+    margin-right: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.flashcard_display {
+    text-align: center;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    width: 60em;
+    height: 100px;
+    padding: 8px 12px;
+    background-color: #d0e1f9;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.input_category_form {
+    display: flex;
+    padding: 10px;
+    background-color: #283655;
+    margin: 20px 40px 30px 40px;
+    border-radius: 10px;
+}
+
+.category-input {
+    background: #d0e1f9;
+    color: #1e1f26;
+    border-radius: 9px;
+    width: 80%;
+    text-indent: 40px;
+}
+
+.name_label {
+    color: #A9A9A9;
+    font-size: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.flashcard_form_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 50px;
+    background-color: #4d648d;
+    margin: 0 70px 70px;
+    border-radius: 20px;
+}
+
+.list_update_button {
+    background: #4d648d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.list_delete_button {
+    background: #B22222;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.group_buttons {
+    float: right;
+}
+
+.input_button {
+    background: #4d648d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    float: right;
+    margin-right: 60px;
+}
+
+.change_card_button {
+    background: #4d648d;
+    color: white;
+    border: 1px solid #07575b;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.good_input_button {
+    background: #228B22;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #228B22;
+}
+
+.bad_input_button {
+    background: #B22222;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #B22222;
+}
