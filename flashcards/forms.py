@@ -4,8 +4,8 @@ from .models import Flashcard, Category
 
 
 class FlashcardForm(forms.ModelForm):
-    first_side = forms.Textarea()
-    second_side = forms.Textarea()
+    first_side = forms.CharField(widget=forms.Textarea(attrs={"maxlength": 250}))
+    second_side = forms.CharField(widget=forms.Textarea(attrs={"maxlength": 250}))
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),
         initial=0
@@ -18,7 +18,7 @@ class FlashcardForm(forms.ModelForm):
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(
-        max_length=250,
+        max_length=100,
         widget=forms.TextInput(attrs={'class': 'category-input'})
     )
 

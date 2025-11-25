@@ -12,11 +12,11 @@
     </div>
 </form>
 {%  for card in cards %}
-    <div class="flashcard_list_info" style="margin-left: 70px; line-height: 40px">
+    <div class="flashcard_list_info">
         <span class="card_text">
-            {{  card.first_side  }} |
-            {{  card.second_side  }}  -
-            {{  card.category.name  }}
+            {{  card.first_side|truncatechars:50   }} |
+            {{  card.second_side|truncatechars:50  }}  -
+            {{  card.category.name|truncatechars:50  }}
         </span>
         <div class="group_buttons">
             <a href="{%  url 'update_flashcard' card.id  %}"><button class="list_update_button" type="button">Update flashcard</button></a>
