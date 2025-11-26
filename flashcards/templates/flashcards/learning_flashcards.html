@@ -7,17 +7,15 @@
 
 <script>
     window.pageData = {
-        front: "{{ card1 }}",
-        back: "{{ card2 }}"
+        front: "{{ card1|escapejs }}",
+        back: "{{ card2|escapejs }}"
     };
 </script>
 
 <section align="center">
 <form>
-    <div class="flashcard_display"  align="center">
-    <p></p>
-    <br>
-    </div>
+    <div class="flashcard_display"  align="center"><p></p></div>
+    <div align="center" class="card_counter">{{  current_learn_cards  }}/{{  count_cards_in_category  }}</div>
     <input class="change_card_button" type="button" value="Перевернуть карточку">
 </form>
 </section>
