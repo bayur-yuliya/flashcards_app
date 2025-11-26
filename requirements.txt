@@ -11,6 +11,8 @@ ipython==8.32.0
 jedi==0.19.2
 matplotlib-inline==0.1.7
 mypy_extensions==1.1.0
+nodeenv==1.9.1
+optional-django==0.1.0
 packaging==25.0
 parso==0.8.4
 pathspec==0.12.1
