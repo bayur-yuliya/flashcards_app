@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('flashcards', '0004_remove_flashcard_is_answered'),
+        ("flashcards", "0004_remove_flashcard_is_answered"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'ordering': ['-id']},
+            name="category",
+            options={"ordering": ["-id"]},
         ),
     ]

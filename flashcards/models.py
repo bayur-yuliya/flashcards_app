@@ -5,14 +5,16 @@ class Category(models.Model):
     name = models.CharField(max_length=250)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
     def __str__(self):
         return self.name
 
 
 class Flashcard(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='flashcards')
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="flashcards"
+    )
     first_side = models.TextField(blank=False)
     second_side = models.TextField(blank=False)
 

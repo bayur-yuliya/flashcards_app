@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('flashcards', '0001_initial'),
+        ("flashcards", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='flashcard',
-            name='is_answered',
+            model_name="flashcard",
+            name="is_answered",
             field=models.BooleanField(default=False),
         ),
     ]
