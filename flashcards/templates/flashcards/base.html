@@ -7,14 +7,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{%  block title  %}{%  endblock  %}</title>
+    <link type="text/css" rel="stylesheet" href="{%  static 'flashcards/css/styles.css'  %}">
 </head>
 <body>
-<a href="{%  url 'index'  %}">Home page</a>
-<div align="right">
-    <a href="{%  url 'create_category'  %}"><button type="button">Create category</button></a>
-    <a href="{%  url 'create_flashcard'  %}"><button type="button">Create flashcard</button></a>
+<br>
+<div class="header_container">
+    <div>
+        <a href="{%  url 'categories_list'  %}"><button type="button" class="nav_bottom">Categories list</button></a>
+        <a href="{%  url 'flashcards_list'  %}"><button type="button" class="nav_bottom">Flashcards list</button></a>
+    </div>
+    <div>
+        <a href="{%  url 'create_flashcard'  %}"><button type="button" class="nav_bottom">Create flashcard</button></a>
+        <a href="{%  url 'create_category'  %}"><button type="button" class="nav_bottom">Create category</button></a>
+    </div>
 </div>
-<hr>
+
 {%  block content  %}{%  endblock  %}
 </body>
 </html>

@@ -5,46 +5,29 @@
 
 {%  block content  %}
 
-<style>
-.flashcard {
-    text-align: center;
-    margin: auto;
-    margin-bottom: 30px;
-    width: 30em;
-    border: 1px solid #333;
-    box-shadow: 8px 8px 5px #444;
-    padding: 8px 12px;
-    background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
-}
-</style>
-
 <script>
     window.pageData = {
-        front: "{{ card1 }}",
-        back: "{{ card2 }}"
+        front: "{{ card1|escapejs }}",
+        back: "{{ card2|escapejs }}"
     };
 </script>
 
-<section  align="center">
+<section align="center">
 <form>
-    <div class="flashcard"  align="center">
-    <p></p>
-    <br>
-    </div>
-    <input type="button" value="Перевернуть карточку">
+    <div class="flashcard_display"  align="center"><p></p></div>
+    <div align="center" class="card_counter">{{  current_learn_cards  }}/{{  count_cards_in_category  }}</div>
+    <input class="change_card_button" type="button" value="Перевернуть карточку">
 </form>
 </section>
 
-<br>
-<br>
 <div align="center">
 <form method="POST">
     {% csrf_token %}
-    <input class="input_button" type="submit" name='wrong' value="Wrong">
+    <input class="bad_input_button" type="submit" name='wrong' value="Wrong">
     {%  if last  %}
-        <input class="input_button" type="submit" name='complete' value="Сomplete">
+        <input class="good_input_button" type="submit" name='complete' value="Сomplete">
     {%  else  %}
-        <input class="input_button" type="submit" name='learn' value="Learn">
+        <input class="good_input_button" type="submit" name='learn' value="Learn">
     {%  endif  %}
 </form>
 </div>
