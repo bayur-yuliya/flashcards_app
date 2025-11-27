@@ -24,7 +24,7 @@
 <form method="POST">
     {% csrf_token %}
     <input class="bad_input_button" type="submit" name='wrong' value="Wrong">
-    {%  if last  %}
+    {%  if is_last_card_in_session  %}
         <input class="good_input_button" type="submit" name='complete' value="Сomplete">
     {%  else  %}
         <input class="good_input_button" type="submit" name='learn' value="Learn">

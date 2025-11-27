@@ -33,13 +33,13 @@ class FlashcardForm(forms.ModelForm):
         )
 
     def clean_first_side(self):
-        first_side = self.cleaned_data['first_side']
-        lines = first_side.split(' \n')
+        first_side = self.cleaned_data["first_side"]
+        lines = first_side.split(" \n")
         return lines
 
     def clean_second_side(self):
-        second_side = self.cleaned_data['second_side']
-        lines = second_side.split(' \n')
+        second_side = self.cleaned_data["second_side"]
+        lines = second_side.split(" \n")
         return lines
 
     def save(self, commit=True):
