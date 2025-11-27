@@ -125,40 +125,31 @@ def delete_category(request, category_id):
 
 
 def learning_flashcards(request, category_id):
-    # Obtaining cards for other functions
-    flashcards = get_cards(request, category_id)
+    flashcards, errors = get_cards(request, category_id)
+    if errors:
+        return errors
     last_card_id = request.session.get("last_card_id")
 
-    # Activate the counter
-    len_cards = get_counter(category_id, flashcards)
+    current_learn_cards, count_cards_in_category = get_counter(category_id, flashcards)
 
-    # Checking the answer to the card
     if request.method == "POST":
-        redirect_response = catches_the_answer_on_the_card(
+        flashcards, redirect_response = catches_the_answer_on_the_card(
             request, flashcards, last_card_id
         )
-        flashcards = get_cards(request, category_id)
-        len_cards = get_counter(category_id, flashcards)
         if redirect_response:
             return redirect_response
+        current_learn_cards, count_cards_in_category = get_counter(category_id, flashcards)
 
-    # Checking if this is the last card (to change the button)
-    is_last_card_in_session = len(flashcards) == 1
-
-    # Receiving a random card
     card = get_random_card(last_card_id, flashcards)
-
-    # Set the ID of the last card in the session to avoid card repetition.
     request.session["last_card_id"] = card[0]
 
-    # Flip the card after pressing the button
     if request.GET.get("reverse"):
         card1, card2 = card[2], card[1]
     else:
         card1, card2 = card[1], card[2]
 
-    current_learn_cards = len_cards[0]
-    count_cards_in_category = len_cards[1]
+    is_last_card_in_session = len(flashcards) == 1
+
     return render(
         request,
         "flashcards/learning_flashcards.html",

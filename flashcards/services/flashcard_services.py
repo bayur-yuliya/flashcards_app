@@ -16,23 +16,29 @@ def get_cards(request, category_id):
             )
         )
         if not flashcards:
-            return redirect(reverse("create_flashcard"))
+            return None, redirect(reverse("create_flashcard"))
         request.session["flashcards"] = flashcards
     else:
         flashcards = request.session["flashcards"]
     if not flashcards:
-        return redirect(reverse("categories_list"))
-    return flashcards
+        return None, redirect(reverse("categories_list"))
+    return flashcards, None
+
+
+def get_available_cards(flashcards, last_card_id):
+    return [card for card in flashcards if card[0] != last_card_id]
 
 
 def get_random_card(last_card_id, flashcards):
     if len(flashcards) == 0:
         return None
-    card = random.choice(flashcards)
-    if len(flashcards) > 1 and card[0] == last_card_id:
-        while card[0] == last_card_id:
-            card = random.choice(flashcards)
-    return card
+    if len(flashcards) == 1:
+        return flashcards[0]
+    available_cards = get_available_cards(flashcards, last_card_id)
+    if available_cards:
+        return random.choice(available_cards)
+    else:
+        return random.choice(flashcards)
 
 
 def get_counter(category, flashcards):
@@ -44,13 +50,14 @@ def get_counter(category, flashcards):
 
 def catches_the_answer_on_the_card(request, flashcards, last_card_id):
     if "learn" in request.POST and last_card_id:
-        flashcards = [card for card in flashcards if card[0] != last_card_id]
+        flashcards = get_available_cards(flashcards, last_card_id)
         request.session["flashcards"] = flashcards
         if not flashcards:
             request.session.clear()
-            return redirect(reverse("categories_list"))
+            return None, redirect(reverse("categories_list"))
+        return flashcards, None
     elif "wrong" in request.POST:
-        pass
+        return flashcards, None
     elif "complete" in request.POST:
         request.session.clear()
-        return redirect(reverse("categories_list"))
+        return None, redirect(reverse("categories_list"))
