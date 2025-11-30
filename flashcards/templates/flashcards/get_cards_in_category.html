@@ -1,0 +1,12 @@
+{%  extends "flashcards/base.html"  %}
+
+{%  block title  %}{{title}}{%  endblock  %}
+
+{%  block content  %}
+<h1>{{  category  }}</h1>
+<div class="get_cards_in_category">
+{%  for card in cards  %}
+    {{ card }}<br>
+{%  endfor  %}
+</div>
+{%  endblock  %}

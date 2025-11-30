@@ -174,3 +174,14 @@ def create_group_of_flashcards(request):
             return redirect(reverse("categories_list"))
     form = GroupOfFlashcardsForm()
     return render(request, "flashcards/group_of_flashcards.html", {"form": form})
+
+
+def get_cards_in_category(request, category_id):
+    title = "Get all cards in category"
+    category = Category.objects.get(id=category_id)
+    cards = Flashcard.objects.filter(category=category)
+    return render(
+        request,
+        "flashcards/get_cards_in_category.html",
+        {"title": title, "category": category, "cards": cards},
+    )

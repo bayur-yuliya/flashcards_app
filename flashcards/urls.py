@@ -3,7 +3,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("flashcard/create/group/", views.create_group_of_flashcards, name="create_group_of_flashcards"),
+    path(
+        "flashcard/create/group/",
+        views.create_group_of_flashcards,
+        name="create_group_of_flashcards",
+    ),
     path("flashcard/create/", views.create_flashcard, name="create_flashcard"),
     path(
         "flashcard/<int:flashcard_id>/update/",
@@ -11,6 +15,7 @@ urlpatterns = [
         name="update_flashcard",
     ),
     path("category/create/", views.create_category, name="create_category"),
+    path("category/<int:category_id>/all/", views.get_cards_in_category, name="get_cards_in_category"),
     path(
         "category/<int:category_id>/update/",
         views.update_category,

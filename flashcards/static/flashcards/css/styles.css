@@ -19,6 +19,10 @@ select {
     text-indent: 40px;
 }
 
+.select_category {
+    width: 50%;
+}
+
 .line-counter {
     font-size: 12px;
     color: #666;
@@ -55,6 +59,21 @@ select {
 
 .card_textarea:focus {
     box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+}
+
+.get_cards_in_category {
+    padding: 25px;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    width: 60em;
+    line-height: normal;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #d0e1f9;
+    border-radius: 12px;
+    overflow: auto;
+    overflow-wrap: break-word;
 }
 
 .separator_form {

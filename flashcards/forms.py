@@ -77,13 +77,15 @@ class GroupOfFlashcardsForm(forms.Form):
             }
         )
     )
-    separator = forms.CharField(widget=forms.TextInput(attrs={"class": "separator_form"}), max_length=3)
+    separator = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "separator_form"}), max_length=3
+    )
 
     def save_cards(self):
-        area_content = self.cleaned_data['area']
+        area_content = self.cleaned_data["area"]
         cards = area_content.splitlines()
 
-        separator = self.cleaned_data['separator']
+        separator = self.cleaned_data["separator"]
         category = self.cleaned_data["category"]
 
         for card in cards:
@@ -95,6 +97,8 @@ class GroupOfFlashcardsForm(forms.Form):
                 parts = card.split(separator, 1)
                 first = parts[0].strip()
                 second = parts[1].strip()
-                Flashcard.objects.create(category=category, first_side=first, second_side=second)
+                Flashcard.objects.create(
+                    category=category, first_side=first, second_side=second
+                )
             else:
                 print(f"Пропущена карточка без разделителя: {card}")
