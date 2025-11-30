@@ -12,14 +12,12 @@ h1 {
 }
 
 select {
-    margin-left: 5%;
     background: #d0e1f9;
     color: #1e1f26;
-    border-radius: 9px;
+    border-radius: 6px;
     width: 90%;
     text-indent: 40px;
 }
-
 
 .line-counter {
     font-size: 12px;
@@ -38,8 +36,33 @@ select {
     min-height: 60px;
 }
 
+.group_card_textarea {
+    padding: 12px 15px;
+    width: 90%;
+    resize: none;
+    font-size: 16px;
+    background: #d0e1f9;
+    border-radius: 16px;
+    min-height: 60px;
+    margin: 20px;
+}
+
+.group_card_textarea.text {
+    padding: 12px 15px;
+    font-size: 16px;
+
+}
+
 .card_textarea:focus {
     box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+}
+
+.separator_form {
+    display: flex;
+    padding: 10px;
+    background-color: #d0e1f9;
+    margin: 20px 40px 30px 40px;
+    border-radius: 10px;
 }
 
 .header_container {
@@ -83,7 +106,7 @@ select {
 .flashcard_list_info {
     margin-left: 60px;
     margin-right: 60px;
-    line-height: 40px
+    line-height: 40px;
     display: flex;
     justify-content: space-between;
 }
@@ -93,6 +116,10 @@ select {
     font-size: 16px;
     word-break: break-all;
     padding-right: 100px;
+}
+
+.group_of_flashcards_area {
+    padding:  40px;
 }
 
 .flashcard_display {
@@ -111,7 +138,6 @@ select {
 }
 
 .flashcard_display p {
-
     white-space: pre-wrap;
     padding: 12px 25px;
     font-size: 20px;

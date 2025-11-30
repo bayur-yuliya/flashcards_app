@@ -1,0 +1,18 @@
+{%  extends "flashcards/base.html"  %}
+
+{%  block title  %}{{title}}{%  endblock  %}
+
+{%  block content  %}
+<h1>{{  title  }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="group_of_flashcards_area" align="center">
+        {{  form.category  }}
+        {{  form.area  }}
+        {{  form.separator  }}
+        <input class="input_button" type="submit" value="Save">
+    </div>
+</form>
+
+{%  endblock  %}

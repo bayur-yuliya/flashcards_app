@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("flashcard/create/group/", views.create_group_of_flashcards, name="create_group_of_flashcards"),
     path("flashcard/create/", views.create_flashcard, name="create_flashcard"),
     path(
         "flashcard/<int:flashcard_id>/update/",

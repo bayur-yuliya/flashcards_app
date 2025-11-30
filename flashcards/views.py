@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from .forms import FlashcardForm, CategoryForm, CategoryFindForm
+from .forms import FlashcardForm, CategoryForm, CategoryFindForm, GroupOfFlashcardsForm
 from .models import Flashcard, Category
 from .services.flashcard_services import (
     get_cards,
@@ -138,7 +138,9 @@ def learning_flashcards(request, category_id):
         )
         if redirect_response:
             return redirect_response
-        current_learn_cards, count_cards_in_category = get_counter(category_id, flashcards)
+        current_learn_cards, count_cards_in_category = get_counter(
+            category_id, flashcards
+        )
 
     card = get_random_card(last_card_id, flashcards)
     request.session["last_card_id"] = card[0]
@@ -162,3 +164,13 @@ def learning_flashcards(request, category_id):
             "count_cards_in_category": count_cards_in_category,
         },
     )
+
+
+def create_group_of_flashcards(request):
+    if request.method == "POST":
+        form = GroupOfFlashcardsForm(request.POST)
+        if form.is_valid():
+            form.save_cards()
+            return redirect(reverse("categories_list"))
+    form = GroupOfFlashcardsForm()
+    return render(request, "flashcards/group_of_flashcards.html", {"form": form})
