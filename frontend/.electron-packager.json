@@ -1,0 +1,16 @@
+{
+  "name": "FlashCardsDesktop",
+  "platform": "win32",
+  "arch": "x64",
+  "out": "dist",
+  "overwrite": true,
+  "prune": true,
+  "ignore": [
+    "/backend/__pycache__($|/)",
+    "/backend/.venv($|/)",
+    "/backend/*.log($|/)",
+    "/node_modules/electron-builder($|/)"
+  ],
+  "extraResource": "../backend",
+  "asar": false
+}

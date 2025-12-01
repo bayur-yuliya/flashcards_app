@@ -49,11 +49,13 @@
 .idea/
 .venv/
 
-db.sqlite3
+backend/db.sqlite3
 config.py
 
 # Python cache
-flashcards_app/__pycache__/
-flashcards/__pycache__/
+backend/flashcards_app/__pycache__/
+backend/flashcards/__pycache__/
 
 frontend/node_modules/
+frontend/build/
+frontend/flashcards-desktop-win32-x64/

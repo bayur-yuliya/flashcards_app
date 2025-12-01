@@ -8,8 +8,10 @@
 <form method="POST">
     {% csrf_token %}
     <div class="group_of_flashcards_area" align="center">
+        Category: <br><br>
         {{  form.category  }}
         {{  form.area  }}
+        Separator:
         {{  form.separator  }}
         <input class="input_button" type="submit" value="Save">
     </div>

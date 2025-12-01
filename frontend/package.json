@@ -1,42 +1,92 @@
 {
-    "name": "flashcards_app",
-    "version": "1.0.0",
-    "description": "Django desktop application",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron .",
-        "dev": "electron . --dev",
-        "build": "electron-builder",
-        "build-win": "electron-builder --win",
-        "build-mac": "electron-builder --mac",
-        "build-linux": "electron-builder --linux"
+  "name": "flashcards-desktop",
+  "version": "1.0.0",
+  "description": "Desktop flashcards application built with Django and Electron",
+  "main": "main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "keywords": [
+    "flashcards",
+    "education",
+    "desktop",
+    "django",
+    "electron"
+  ],
+  "author": "Bayur Yuliya",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^22.0.0",
+    "electron-builder": "^24.0.0",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.github.bayur.flashcards",
+    "productName": "FlashCards Desktop",
+    "directories": {
+      "output": "build"
     },
-    "devDependencies": {
-        "electron": "^22.0.0",
-        "electron-builder": "^24.0.0"
-    },
-    "build": {
-        "appId": "com.flashcards_app.flashcards",
-        "productName": "Your Desktop App",
-        "directories": {
-            "output": "dist"
+    "files": [
+      "**/*",
+      "../backend/**/*",
+      "!../backend/__pycache__",
+      "!../backend/*/__pycache__",
+      "!../backend/*/*/__pycache__",
+      "!../backend/*.log",
+      "!../backend/db.sqlite3"
+    ],
+    "extraResources": [
+      {
+        "from": "../backend",
+        "to": "backend",
+        "filter": [
+          "**/*",
+          "!__pycache__",
+          "!*.log",
+          "!db.sqlite3"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
         },
-        "files": [
-            "flashcards/**/*",
-            "frontend/**/*",
-            "node_modules/**/*"
-        ],
-        "win": {
-            "target": "nsis",
-            "icon": "assets/icon.ico"
-        },
-        "mac": {
-            "target": "dmg",
-            "icon": "assets/icon.icns"
-        },
-        "linux": {
-            "target": "AppImage",
-            "icon": "assets/icon.png"
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
         }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.education"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png",
+      "category": "Education"
     }
+  }
 }

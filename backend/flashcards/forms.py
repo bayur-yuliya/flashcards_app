@@ -32,21 +32,19 @@ class FlashcardForm(forms.ModelForm):
             "second_side",
         )
 
-    def clean_first_side(self):
-        first_side = self.cleaned_data["first_side"]
-        lines = first_side.split(" \n")
-        return lines
-
-    def clean_second_side(self):
-        second_side = self.cleaned_data["second_side"]
-        lines = second_side.split(" \n")
+    @staticmethod
+    def clean_side(side):
+        lines = side.strip(" \n")
         return lines
 
     def save(self, commit=True):
         instance = super().save(commit=False)
 
-        instance.first_side = self.clean_first_side()
-        instance.second_side = self.clean_second_side()
+        first_side = self.cleaned_data["first_side"]
+        second_side = self.cleaned_data["second_side"]
+
+        instance.first_side = self.clean_side(first_side)
+        instance.second_side = self.clean_side(second_side)
 
         if commit:
             instance.save()
