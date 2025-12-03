@@ -222,6 +222,7 @@ select {
 
 .group_buttons {
     float: right;
+    display: inline-flex;
 }
 
 .input_button {

@@ -15,7 +15,11 @@ urlpatterns = [
         name="update_flashcard",
     ),
     path("category/create/", views.create_category, name="create_category"),
-    path("category/<int:category_id>/all/", views.get_cards_in_category, name="get_cards_in_category"),
+    path(
+        "category/<int:category_id>/all/",
+        views.get_cards_in_category,
+        name="get_cards_in_category",
+    ),
     path(
         "category/<int:category_id>/update/",
         views.update_category,
@@ -28,12 +32,12 @@ urlpatterns = [
     ),
     path("flashcard/", views.flashcards_list, name="flashcards_list"),
     path(
-        "delete_category/<int:category_id>",
+        "delete_category/",
         views.delete_category,
         name="delete_category",
     ),
     path(
-        "delete_flashcard/<int:flashcard_id>",
+        "delete_flashcard/",
         views.delete_flashcard,
         name="delete_flashcard",
     ),

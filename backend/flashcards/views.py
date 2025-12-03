@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.views.decorators.http import require_POST
 
 from .forms import FlashcardForm, CategoryForm, CategoryFindForm, GroupOfFlashcardsForm
 from .models import Flashcard, Category
@@ -59,7 +60,9 @@ def flashcards_list(request):
     )
 
 
-def delete_flashcard(request, flashcard_id):
+@require_POST
+def delete_flashcard(request):
+    flashcard_id = request.POST.get("card_id")
     card_deleted = Flashcard.objects.get(id=flashcard_id)
     card_deleted.delete()
     return redirect(reverse("flashcards_list"))
@@ -110,18 +113,12 @@ def categories_list(request):
     )
 
 
-def delete_category(request, category_id):
+@require_POST
+def delete_category(request):
+    category_id = request.POST.get("category_id")
     category_deleted = Category.objects.get(id=category_id)
     category_deleted.delete()
-    categories = Category.objects.all()
-    return render(
-        request,
-        "flashcards/categories_list.html",
-        {
-            "title": "Categories",
-            "categories": categories,
-        },
-    )
+    return redirect(reverse("categories_list"))
 
 
 def learning_flashcards(request, category_id):

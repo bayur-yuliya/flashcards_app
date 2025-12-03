@@ -3,31 +3,28 @@
 {%  block title  %}{{title}}{%  endblock  %}
 
 {%  block content  %}
-
-<form method="POST">
-    {% csrf_token %}
-    <br>
-    <br>
-    {%  for category in categories %}
-
-    <div class="category-container">
-        <div class="category" style="margin-left: 50px;">
-            <span class="category_text">
-            {{ category }} ({{ category.flashcards.count }})
-            </span>
-            <a href="{% url 'learning_flashcards' category.id %}"><button type="button" class="list_update_button" >Learning</button></a>
-            <a href="{% url 'learning_flashcards' category.id %}?reverse=1"><button type="button" class="list_update_button" >Learning by second side</button></a>
-        </div>
-        <div class="group_buttons">
-            <a href="{% url 'get_cards_in_category' category.id %}"><button class="list_update_button" type="button">Get all cards</button></a>
-            <a href="{% url 'update_category' category.id %}"><button class="list_update_button" type="button">Update category</button></a>
-            <a href="{% url 'delete_category' category.id %}"><button class="list_delete_button" type="button">Delete</button></a>
-        </div>
+<br><br><br>
+{%  for category in categories %}
+<div class="category-container">
+    <div class="category" style="margin-left: 50px;">
+        <span class="category_text">
+        {{ category }} ({{ category.flashcards.count }})
+        </span>
+        <a href="{% url 'learning_flashcards' category.id %}"><button type="button" class="list_update_button" >Learning</button></a>
+        <a href="{% url 'learning_flashcards' category.id %}?reverse=1"><button type="button" class="list_update_button" >Learning by second side</button></a>
     </div>
-    <hr>
+    <div class="group_buttons">
+        <a href="{% url 'get_cards_in_category' category.id %}"><button class="list_update_button" type="button">Get all cards</button></a>
+        <a href="{% url 'update_category' category.id %}"><button class="list_update_button" type="button">Update category</button></a>
+        <form method="POST" action="{%  url 'delete_category' %}">
+            {%  csrf_token  %}
+            <input type="hidden" name="category_id" value="{{category.id}}">
+            <button type="submit" class="list_delete_button">Delete</button>
+        </form>
+    </div>
+</div>
+<hr>
 
-    {%  endfor  %}
+{%  endfor  %}
 
-    <br>
-</form>
 {%  endblock  %}
