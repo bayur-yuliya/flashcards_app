@@ -20,11 +20,7 @@
         </span>
         <div class="group_buttons">
             <a href="{%  url 'update_flashcard' card.id  %}"><button class="list_update_button" type="button">Update flashcard</button></a>
-            <form method="POST" action="{%  url 'delete_flashcard' %}">
-                {%  csrf_token  %}
-                <input type="hidden" name="card_id" value="{{card.id}}">
-                <button type="submit" class="list_delete_button">Delete</button>
-            </form>
+            <button type="submit" class="list_delete_button">Delete</button>
         </div>
     </div>
     <hr>

@@ -16,15 +16,9 @@
     <div class="group_buttons">
         <a href="{% url 'get_cards_in_category' category.id %}"><button class="list_update_button" type="button">Get all cards</button></a>
         <a href="{% url 'update_category' category.id %}"><button class="list_update_button" type="button">Update category</button></a>
-        <form method="POST" action="{%  url 'delete_category' %}">
-            {%  csrf_token  %}
-            <input type="hidden" name="category_id" value="{{category.id}}">
-            <button type="submit" class="list_delete_button">Delete</button>
-        </form>
+        <button type="submit" class="list_delete_button">Delete</button>
     </div>
 </div>
 <hr>
-
 {%  endfor  %}
-
 {%  endblock  %}

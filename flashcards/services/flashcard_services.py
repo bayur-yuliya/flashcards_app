@@ -70,7 +70,7 @@ def get_counter(category, flashcards):
 
 
 def catches_the_answer_on_the_card(request, flashcards, last_card_id):
-    if request.method != 'POST':
+    if request.method != "POST":
         raise ValueError("The function expects a POST request.")
 
     if "learn" in request.POST and last_card_id:
