@@ -1,4 +1,5 @@
 {%  extends "flashcards/base.html" %}
+{%  load static  %}
 
 {%  block title  %}{{title}}{%  endblock  %}
 
@@ -16,9 +17,19 @@
     <div class="group_buttons">
         <a href="{% url 'get_cards_in_category' category.id %}"><button class="list_update_button" type="button">Get all cards</button></a>
         <a href="{% url 'update_category' category.id %}"><button class="list_update_button" type="button">Update category</button></a>
-        <button type="submit" class="list_delete_button">Delete</button>
+        <button onclick="openDeleteDialog({{ category.id  }}, '{{ category  }}')" class="list_delete_button">Delete</button>
     </div>
+    <dialog id="deleteDialog">
+      <form method="POST" action="{%  url 'delete_category'  %}">
+        {% csrf_token %}
+        <p id="deleteText"></p>
+        <input type="hidden" name="category_id" id="deleteId" value="{{ category.id }}">
+        <button type="reset" onclick="document.getElementById('deleteDialog').close()">Назад</button>
+        <button type="submit">Удалить</button>
+      </form>
+    </dialog>
 </div>
 <hr>
 {%  endfor  %}
+<script src="{%  static 'flashcards/js/delete_dialog_script.js'  %}"></script>
 {%  endblock  %}
