@@ -65,6 +65,7 @@ def delete_flashcard(request):
     flashcard_id = request.POST.get("card_id")
     card_deleted = Flashcard.objects.get(id=flashcard_id)
     card_deleted.delete()
+
     return redirect(reverse("flashcards_list"))
 
 
