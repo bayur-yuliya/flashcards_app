@@ -11,6 +11,14 @@
 </head>
 <body>
 <br>
+<div class="header_container" align="right">
+    <div>
+    {%  if not user.is_authenticated  %}
+        <a href="{%  url 'login'  %}"><button type="button" class="nav_bottom">Login</button></a>
+        <a href="{%  url 'register'  %}"><button type="button" class="nav_bottom">Register</button></a>
+    {%  endif  %}
+    </div>
+</div>
 <div class="header_container">
     <div>
         <a href="{%  url 'categories_list'  %}"><button type="button" class="nav_bottom">Categories list</button></a>
